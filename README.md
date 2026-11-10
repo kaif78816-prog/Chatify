@@ -1,0 +1,2 @@
+# Chatify
+Personal chatting app 
