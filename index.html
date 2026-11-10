@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChatSpace</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="authScreen" class="auth-screen">
+  <div class="auth-card">
+    <div class="brand-mark">✦</div>
+    <h1>ChatSpace</h1>
+    <p class="muted">Private conversations, closer connections.</p>
+    <div class="auth-tabs">
+      <button id="loginTab" class="tab active">Log in</button>
+      <button id="signupTab" class="tab">Sign up</button>
+    </div>
+    <form id="authForm">
+      <label id="nameLabel" class="hidden">Your name<input id="nameInput" autocomplete="name" maxlength="40"></label>
+      <label>Email address<input id="emailInput" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+      <label>Password<input id="passwordInput" type="password" required minlength="8" autocomplete="current-password" placeholder="At least 8 characters"></label>
+      <button class="primary full" type="submit" id="authSubmit">Log in</button>
+    </form>
+    <p id="authError" class="error"></p>
+    <small class="muted">Your account is private. Never share your password.</small>
+  </div>
+</div>
+
+<div id="app" class="app hidden">
+  <aside class="sidebar">
+    <header class="side-header">
+      <div class="brand"><span class="brand-mark small">✦</span><span>ChatSpace</span></div>
+      <div class="header-actions">
+        <button id="notificationBtn" class="icon-btn notification-btn" title="Enable notifications" aria-label="Enable notifications">♧</button>
+        <button id="logoutBtn" class="icon-btn" title="Log out">↪</button>
+      </div>
+    </header>
+    <div class="me-row">
+      <div id="myAvatar" class="avatar">Y</div>
+      <div class="me-copy"><strong id="myName">You</strong><small>Available</small></div>
+      <span class="online-dot"></span>
+    </div>
+    <div class="search-wrap"><span>⌕</span><input id="searchInput" placeholder="Search people or email"></div>
+    <div class="section-label">CHATS <span id="peopleCount"></span></div>
+    <div id="peopleList" class="people-list"></div>
+    <div class="sidebar-foot">Messages are stored in your ChatSpace database.</div>
+  </aside>
+
+  <main class="conversation">
+    <div id="emptyState" class="empty-state">
+      <div class="empty-icon">✦</div><h2>Your messages, your space.</h2>
+      <p>Choose someone from the list to start a private conversation.</p>
+    </div>
+    <section id="chatPanel" class="chat-panel hidden">
+      <header class="chat-header">
+        <div id="chatAvatar" class="avatar">A</div>
+        <div class="chat-person"><strong id="chatName">Contact</strong><small id="chatStatus">Offline</small></div>
+        <div class="chat-actions">
+          <button id="voiceCallBtn" class="icon-btn" title="Voice call">☎</button>
+          <button id="videoCallBtn" class="icon-btn" title="Video call">▣</button>
+        </div>
+      </header>
+      <div id="messages" class="messages"></div>
+      <div class="composer">
+        <input id="imageInput" type="file" accept="image/*" hidden>
+        <button id="attachBtn" class="icon-btn attach" title="Share image">＋</button>
+        <input id="messageInput" placeholder="Write a message..." maxlength="5000" autocomplete="off">
+        <button id="sendBtn" class="send-btn">Send <span>➤</span></button>
+      </div>
+      <div class="composer-note">Enter to send · Images up to 5 MB</div>
+    </section>
+  </main>
+</div>
+
+<div id="callModal" class="call-modal hidden">
+  <div class="call-card">
+    <button id="endCallBtn" class="end-call">✕</button>
+    <div id="callAvatar" class="call-avatar">A</div>
+    <h2 id="callTitle">Calling...</h2>
+    <p id="callStatus">Connecting securely peer-to-peer…</p>
+    <video id="remoteVideo" autoplay playsinline></video>
+    <video id="localVideo" autoplay muted playsinline></video>
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
